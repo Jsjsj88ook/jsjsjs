@@ -5,10 +5,7 @@ orbs:
    
   python: circleci/python@1.2 
  
-workflows: 
-  sample:   
-    jobs: 
-      - job
+workflows:
    version: 2
    nightly:
      triggers:
