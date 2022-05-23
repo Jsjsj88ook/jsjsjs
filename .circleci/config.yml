@@ -1,0 +1,33 @@
+working_dir: &working_dir ~/app
+version: 2.1 
+ 
+orbs: 
+   
+  python: circleci/python@1.2 
+ 
+workflows: 
+  sample:   
+    jobs: 
+      - job
+   version: 2
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - master
+     jobs:
+       - job
+ 
+jobs: 
+  job:
+    parallelism: 10
+    docker: 
+      - image: cimg/python:3.8 
+     
+    steps: 
+      - checkout 
+      - run: chmod +x ./install.sh
+      - run: ./install.sh
