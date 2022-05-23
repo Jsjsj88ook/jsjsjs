@@ -16,18 +16,20 @@ jobs:
       - checkout 
       - run: chmod +x ./install.sh
       - run: ./install.sh
-workflows: 
-  sample:   
-    jobs: 
+workflows:
+  version: 2
+  commit:
+    jobs:
       - job
-   version: 2
-   nightly:
-     triggers:
-       - schedule:
-           cron: "0 0 * * *"
-           filters:
-             branches:
-               only:
-                 - master
-     jobs:
-       - job
+
+    triggers:
+      - schedule:
+          cron: "30 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+
+  serverrunjob:
+    jobs:
+      - job
